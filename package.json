@@ -1,0 +1,22 @@
+{
+  "name": "personal-finance-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kolya15/personal-finance-management.git"
+  },
+  "author": "Kolya Soroka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kolya15/personal-finance-management/issues"
+  },
+  "homepage": "https://github.com/Kolya15/personal-finance-management#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
