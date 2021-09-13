@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const config = require('./src/config')
 const app = express()
 const mongoose = require('mongoose')
@@ -6,6 +7,7 @@ const routes = require('./src/routes/index')
 
 
 app.use(express.json());
+app.use(cors());
 app.use(routes);
 
 const start = async () => {
