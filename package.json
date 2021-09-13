@@ -2,10 +2,10 @@
   "name": "personal-finance-management",
   "version": "1.0.0",
   "description": "",
-  "main": "index",
+  "main": "app.js",
   "scripts": {
-    "serve": "nodemon index",
-    "start": "node index",
+    "serve": "nodemon app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +19,10 @@
   },
   "homepage": "https://github.com/Kolya15/personal-finance-management#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5"
   },
   "devDependencies": {
