@@ -24,7 +24,7 @@ class authController {
                 return res.status(400).json({message: 'User duplicate'})
             }
             const user = new User({userName: userName, password: bcrypt.hashSync(password, 7)})
-            await user.save().then(newUser => console.log(newUser));
+            await user.save()
             const token = generateAccessToken(user._id)
             return res.json({token})
         } catch (e){
