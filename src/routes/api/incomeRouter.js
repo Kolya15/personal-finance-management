@@ -2,8 +2,6 @@ const {Router} = require('express')
 const router = new Router()
 const incomeController = require('../../controllers/incomeController')
 const {check} = require('express-validator')
-// const getUserId = require('../../middleware/userIdMiddleware')
-
 router.post('/create', [
     check('amount').isNumeric(),
     check('categoryId').isNumeric(),
