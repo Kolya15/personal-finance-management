@@ -3,7 +3,7 @@ const {validationResult} = require('express-validator')
 
 class incomeController {
 
-    async createIncome(req, res){
+    async addIncome(req, res){
         try{
             console.log(req.user)
             const errors = validationResult(req)
@@ -14,7 +14,7 @@ class incomeController {
             const newIncome = new Income({amount, text, categoryId, date, userId: req.user.id})
 
             await newIncome.save()
-            return res.json({newIncome})
+            return res.json({data: newIncome})
         }catch(e) {
             console.log(e)
         }
