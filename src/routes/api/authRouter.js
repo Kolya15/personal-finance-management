@@ -1,13 +1,10 @@
 const {Router} = require('express')
 const router = new Router()
 const controller = require('../../controllers/authController.js')
-const {check} = require('express-validator')
+const validation = require('../../validation')
 
 
-router.post('/registration', [
-    check('userName', 'Name user incorrect').notEmpty(),
-    check('password', 'password incorrect').isLength({min:8, max:50})
-    ],
+router.post('/registration', validation.registrationValidationParams, validation.checkValidity,
     controller.registration)
 
 router.post('/login', controller.login)

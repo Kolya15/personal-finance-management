@@ -7,24 +7,19 @@ const generateAccessToken = (id) => {
     const payload = {
         id
     }
-
     return jwt.sign(payload, config.jwt.secretKey, {expiresIn: config.jwt.expires})
 }
 
 class authController {
     async registration(req, res) {
         try {
-            const errors = validationResult(req)
-            if(!errors.isEmpty()) {
-                return res.status(400).json({message: 'User error',errors})
-            }
             const {userName, password} = req.body
             const candidate = await User.findOne({userName})
             if(candidate) {
                 return res.status(400).json({message: 'User duplicate'})
             }
             const user = new User({userName: userName, password: bcrypt.hashSync(password, 7)})
-            await user.save().then(newUser => console.log(newUser));
+            await user.save()
             const token = generateAccessToken(user._id)
             return res.json({token})
         } catch (e){
