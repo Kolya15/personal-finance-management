@@ -13,10 +13,6 @@ const generateAccessToken = (id) => {
 class authController {
     async registration(req, res) {
         try {
-            const errors = validationResult(req)
-            if(!errors.isEmpty()) {
-                return res.status(400).json({message: 'User error',errors})
-            }
             const {userName, password} = req.body
             const candidate = await User.findOne({userName})
             if(candidate) {
