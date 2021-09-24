@@ -7,7 +7,7 @@ class ValidationRules {
         body('password', 'password incorrect').isLength({min:8, max:50})
     ];
 
-    incomeValidationParams = [
+    incomeOrExpenseValidationParams = [
         body("amount").isNumeric().withMessage('Field must be numeric'),
         body("categoryId").isMongoId().withMessage('Field must be id format Mongo'),
         body('date').isISO8601().withMessage('Field must be dateTime format'),
@@ -15,23 +15,7 @@ class ValidationRules {
             .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
     ];
 
-    updateIncomeValidationParams = [
-        body("amount").if((value) => value).isNumeric().withMessage('Field must be numeric'),
-        body("categoryId").if((value) => value).isNumeric().withMessage('Field must be numeric'),
-        body('date').if((value) => value).isISO8601().withMessage('Field must be dateTime format'),
-        body('description').if((value) => value).isString().withMessage('Field must be string')
-            .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
-    ];
-
-    expenseValidationParams = [
-        body("amount").isNumeric().withMessage('Field must be numeric'),
-        body("categoryId").isMongoId().withMessage('Field must be id format Mongo'),
-        body('date').isISO8601().withMessage('Field must be dateTime format'),
-        body('description').if((value) => value).isString().withMessage('Field must be string')
-            .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
-    ];
-
-    updateExpenseValidationParams = [
+    updateIncomeOrExpenseValidationParams = [
         body("amount").if((value) => value).isNumeric().withMessage('Field must be numeric'),
         body("categoryId").if((value) => value).isNumeric().withMessage('Field must be numeric'),
         body('date').if((value) => value).isISO8601().withMessage('Field must be dateTime format'),

@@ -1,9 +1,9 @@
 const {Router} = require('express')
 const {Schema, model} = require('mongoose')
 const router = new Router()
-const validation = require('../../validation')
-const Category = require('../../models/Categories')
-const Controller = require('../../controllers/categoriesController')
+const validation = require('../../../validation')
+const Category = require('../../../models/Categories')
+const Controller = require('../../../controllers/categoriesController')
 const incomeCategory = new Controller(Category, model('default_income_categories', new Schema()))
 
 router.get('/', incomeCategory.getAllCategoriesByUser.bind(incomeCategory))

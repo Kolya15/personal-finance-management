@@ -32,7 +32,6 @@ module.exports = class IncomeCategory {
         try {
             const {name} = req.body
             const userId = req.user.id
-            console.log(this)
             const isDuplicate = await this.modelCategory.findOne({$and: [{userId}, {name}]})
             if (isDuplicate) {
                 return res.status(HttpStatusCodes.BAD_REQUEST).send({
