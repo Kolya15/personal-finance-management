@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose')
 
-const Income = new Schema({
+const Expense = new Schema({
     amount: {type: Number, required: true},
     userId: {type: String, required: true},
     description: {type: String},
@@ -8,4 +8,4 @@ const Income = new Schema({
     date: {type: Date, default: Date.now(), required: true}
 })
 
-module.exports =  model('Income', Income)
+module.exports  =  model('Expense', Expense)

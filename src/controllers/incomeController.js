@@ -1,6 +1,5 @@
 const Income = require('../models/Income')
 
-
 class incomeController {
     async addIncome(req, res){
         try{
@@ -17,6 +16,7 @@ class incomeController {
     async getAllIncomeByUser(req, res) {
         try{
             const userId = req.user.id
+
             const income = await Income.find({userId})
             return res.json({income})
         } catch (e) {

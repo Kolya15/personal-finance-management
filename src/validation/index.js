@@ -9,7 +9,7 @@ class ValidationRules {
 
     incomeValidationParams = [
         body("amount").isNumeric().withMessage('Field must be numeric'),
-        body("categoryId").isNumeric().withMessage('Field must be numeric'),
+        body("categoryId").isMongoId().withMessage('Field must be id format Mongo'),
         body('date').isISO8601().withMessage('Field must be dateTime format'),
         body('description').if((value) => value).isString().withMessage('Field must be string')
             .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
@@ -23,7 +23,25 @@ class ValidationRules {
             .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
     ];
 
+    expenseValidationParams = [
+        body("amount").isNumeric().withMessage('Field must be numeric'),
+        body("categoryId").isMongoId().withMessage('Field must be id format Mongo'),
+        body('date').isISO8601().withMessage('Field must be dateTime format'),
+        body('description').if((value) => value).isString().withMessage('Field must be string')
+            .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
+    ];
 
+    updateExpenseValidationParams = [
+        body("amount").if((value) => value).isNumeric().withMessage('Field must be numeric'),
+        body("categoryId").if((value) => value).isNumeric().withMessage('Field must be numeric'),
+        body('date').if((value) => value).isISO8601().withMessage('Field must be dateTime format'),
+        body('description').if((value) => value).isString().withMessage('Field must be string')
+            .isLength({min:0, max: 10}).withMessage('Field must be string min - 0, max - 10')
+    ];
+
+    categoryValidationParams = [
+        body('name').isString().withMessage('Field must be string').isLength({min:1, max: 50}).withMessage('Field must be string min - 1, max - 50')
+    ];
 
     checkValidity(req, res, next) {
         const errors = validationResult(req);
