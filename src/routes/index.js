@@ -3,7 +3,8 @@ const router = Router()
 const varify = require('../middleware/authMiddleware')
 
 router.use('*', varify)
-router.use('/users', require('./api/userRouter'));
+router.use('/users', require('./api/usersRouter'));
+router.use('/current-user', require('./api/currentUserRouter'));
 router.use('/auth', require('./api/authRouter'));
 router.use('/income', require('./api/income/incomeRouter'));
 router.use('/categories/income', require('./api/income/categoriesRouter'));

@@ -52,9 +52,6 @@ module.exports = class incomeController {
             const difference = this.model.modelName === 'Income' ? -(amount - data.amount) : amount - data.amount
             const transaction = await this.model.findByIdAndUpdate(id, data, { new: true})
             const user =  await updateUserBalance(req, difference)
-            // const income = await this.model.findByIdAndUpdate(id, data, { new: true})
-
-            // const user = await updateUserBalance()
             return res.json({transaction, user})
         } catch (e) {
             console.log(e)

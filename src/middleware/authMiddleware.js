@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
         req.user = jwt.verify(token, config.jwt.secretKey);
         return next();
     } catch (err) {
-        return res.status(401).send("Invalid Token");
+        return res.status(401).send({message: "Unauthorized"});
     }
 
 };
