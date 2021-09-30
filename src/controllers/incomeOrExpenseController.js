@@ -4,7 +4,7 @@ const updateUserBalance = async (req, amount) => {
     const userId = req.user.id
     const {currentBalance} = await User.findById(userId)
     const newCurrentBalance = currentBalance + +amount
-    return await User.findByIdAndUpdate(userId, {currentBalance: newCurrentBalance}, {new: true});
+    return await User.findByIdAndUpdate(userId, {currentBalance: newCurrentBalance.toFixed(1)}, {new: true});
 }
 
 module.exports = class incomeController {
@@ -12,13 +12,17 @@ module.exports = class incomeController {
         this.model = model
     }
 
+    checkModel(){
+        return this.model.modelName === 'Income'
+    }
+
     async add(req, res){
         try{
             const {amount, description, categoryId, date} = req.body
             const newIncome = new this.model({amount, description, categoryId, date, userId: req.user.id})
             await newIncome.save()
-            const user = await updateUserBalance(req, this.model.modelName === 'Income'? amount : -(amount))
-            return res.json({user, newIncome})
+            const user = await updateUserBalance(req, this.checkModel() ? amount : -(amount))
+            return res.json({data: {user, newIncome}, message: 'Data added'})
         }catch(e) {
             console.log(e)
         }
@@ -49,7 +53,7 @@ module.exports = class incomeController {
             const {id} = req.params
             const data = req.body
             const {amount} =  await this.model.findById(id)
-            const difference = this.model.modelName === 'Income' ? -(amount - data.amount) : amount - data.amount
+            const difference = this.checkModel() ? -(amount - data.amount) : amount - data.amount
             const transaction = await this.model.findByIdAndUpdate(id, data, { new: true})
             const user =  await updateUserBalance(req, difference)
             return res.json({transaction, user})
