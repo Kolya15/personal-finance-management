@@ -11,7 +11,7 @@ module.exports = class IncomeCategory {
             const userId = req.user.id
             const all = await this.defaultCategories.find()
             const category = await this.modelCategory.find({userId})
-            return res.json({category: [...all, ...category]})
+            return res.json([...all, ...category])
         } catch (e) {
             console.log(e)
             return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send(e);

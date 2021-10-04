@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const currentUserController = require('../controllers/currentUserController')
 
 const updateUserBalance = async (req, amount) => {
     const userId = req.user.id
@@ -21,7 +22,8 @@ module.exports = class incomeController {
             const {amount, description, categoryId, date} = req.body
             const newIncome = new this.model({amount, description, categoryId, date, userId: req.user.id})
             await newIncome.save()
-            const user = await updateUserBalance(req, this.checkModel() ? amount : -(amount))
+            const user = await currentUserController.updateUserBalance.bind(currentUserController, req.user.id, this.checkModel() ? amount : -(amount))
+            console.log(user)
             return res.json({data: {user, newIncome}, message: 'Data added'})
         }catch(e) {
             console.log(e)
